@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}"Семьдесят Семь Деревьев Служения. Часть {{book.nn}}" Автор: Шри Чинмой (Sri Chinmoy){% endblock title %}
+
+{% block header %}
+<h1>Семьдесят Семь Деревьев Служения. Часть {{book.nn}}"</h1>
+<h1>Автор: Шри Чинмой (Sri Chinmoy)</h1>
+{% endblock header %}
+
+{% block content %}
+<div class="content">
+    {% for b in books %}
+    <div id="{{b.nn}}" class="aa">
+        <p class="n">{{b.nn_str}}</p>
+        <p class="en">
+            {{ b.en | join(sep="<br>") | safe}}
+        </p>
+        <p class="ru">
+            {{ b.ru | join(sep="<br>") | safe}}
+        </p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock content %}
