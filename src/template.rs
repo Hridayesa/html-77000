@@ -12,11 +12,10 @@ use crate::config::CONFIG;
 
 lazy_static! {
     pub static ref TEMPLATES: Tera = {
-        
         let tera = match Tera::new(CONFIG.template_pattern.as_str()) {
             Ok(t) => t,
             Err(e) => {
-                println!("Parsing error(s): {}", e);
+                println!("Parsing templates error(s): {:?}", e);
                 ::std::process::exit(1);
             }
         };

@@ -1,24 +1,15 @@
 use std::env::args;
 use std::fs::read_to_string;
 
-use anyhow::Result;
 use lazy_static::lazy_static;
 use serde::{Deserialize, Serialize};
-use thiserror::Error;
-use tracing::{info, warn};
+use crate::{Result, Error};
+use tracing::{info, warn, error};
 
 static DEFAULT_CONFIG_NAME: &str = "config.toml";
 
 lazy_static! {
     pub static ref CONFIG: Config = Config::load_config();
-}
-
-#[derive(Debug, Error)]
-pub enum CfgError {
-    #[error("Ошибка ввода вывода")]
-    Io { #[from]source: std::io::Error },
-    #[error("Ошибка разбора Toml")]
-    Toml { #[from]source: toml::de::Error },
 }
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -48,8 +39,9 @@ impl Config {
         })
     }
 
-    fn do_load_parse(config_name: &str) -> Result<Config, CfgError> {
-        let config_text = read_to_string(config_name)?;
+    fn do_load_parse(config_name: &str) -> Result<Config> {
+        let config_text = read_to_string(config_name)
+            .inspect_err(|e| warn!("===> {:?} file name: {}", e, config_name))?;
         Ok(toml::from_str(config_text.as_str())?)
     }
 }

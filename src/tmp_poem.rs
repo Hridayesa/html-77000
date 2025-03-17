@@ -11,7 +11,7 @@ impl TmpPoem {
         }
     }
 
-    pub fn add(&mut self, line: String) {
+    pub fn add_line(&mut self, line: String) {
         self.lines.push(line)
     }
 }

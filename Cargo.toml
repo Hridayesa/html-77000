@@ -4,17 +4,19 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-scraper = "0.19"
-regex = "1.10"
+scraper = "0.23"
+regex = "1"
 tracing = "0.1"
 tracing-subscriber = "0.3"
-ctor = "0.2"
+ctor = "0.4"
 tera = "1"
 lazy_static = "1"
-itertools = "0.13"
+itertools = "0.14"
 serde = { version = "1", features = ["derive"] }
 threadpool = "1"
 toml = "0.8"
 # anyhow = "1"
 # thiserror = "1"
-derive_more = {version = "1.0.0-beta", features = ["from"]}
+# derive_more = {version = "1.0.0-beta", features = ["from"]}
+# serde_with = "3"
+derive_more = {version = "2", features = ["from"]}
